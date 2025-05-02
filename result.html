@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: url("{{ url_for('static', filename='background.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+
+        .content-box {
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+            padding: 30px 50px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
+            width: 70%;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        img {
+            max-width: 300px;
+            border: 2px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            color: black;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .final-prediction {
+            font-size: 24px;
+            font-weight: bold;
+            color: yellow;
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            background: #007bff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-box">
+        <h1>Prediction Results</h1>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+
+        <h2>Model Predictions:</h2>
+        <table>
+            <tr>
+                <th>Model</th>
+                <th>Predicted Class</th>
+            </tr>
+            {% for model, prediction in predictions.items() %}
+            <tr>
+                <td>{{ model }}</td>
+                <td><strong>{{ prediction }}</strong></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="final-prediction">
+            🌿 Final Prediction: <span>{{ final_prediction }}</span> 🌿
+        </div>
+
+        <br>
+        <a href="/">🔄 Upload Another Image</a>
+    </div>
+
+</body>
+</html>
